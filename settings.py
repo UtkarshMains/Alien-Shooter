@@ -1,8 +1,10 @@
 # Game Settings below.
 
 
-class Settings:
 
+class Settings:
+    GameStarted = False
+    
     def __init__(self):
         """Initialize games static settings"""
         """Screen settings"""

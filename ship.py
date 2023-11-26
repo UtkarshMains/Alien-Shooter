@@ -27,7 +27,7 @@ class Ship(Sprite):
         """Update the ship's position based on the movement flag."""
         if self.moving_right is True and self.rect.right < self.screen_rect.right:
             self.center += self.game_settings.ship_speed_factor
-        if self.moving_left is True and self.rect.left > 0:
+        elif self.moving_left is True and self.rect.left > 0:
             self.center -= self.game_settings.ship_speed_factor
 
         # Update rect object from self.center
