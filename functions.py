@@ -6,10 +6,10 @@ from time import sleep
 
 
 def check_keydown_events(event, ship, game_settings, screen, bullets):
-    if event.key == pygame.K_RIGHT:
+    if event.key == pygame.K_RIGHT or event.key == pygame.K_d:
         ship.moving_right = True
 
-    elif event.key == pygame.K_LEFT:
+    elif event.key == pygame.K_LEFT or event.key == pygame.K_a:
         ship.moving_left = True
 
     elif event.key == pygame.K_SPACE:
@@ -36,15 +36,18 @@ def check_events(ship, game_settings, screen, bullets, play_button, stats, alien
         if event.type == pygame.QUIT:
             sys.exit()
 
+        elif event.type == pygame.MOUSEBUTTONDOWN and not game_settings.GameStarted:
+            mouse_x, mouse_y = pygame.mouse.get_pos()
+            check_play_button(stats, play_button, mouse_x, mouse_y, bullets, game_settings, screen, ship, aliens, sb)
+            game_settings.GameStarted = True
+
         # When right or left key is pressed below conditions will be executed.
         elif event.type == pygame.KEYDOWN:
             check_keydown_events(event, ship, game_settings, screen, bullets)  # Call the function for key pressed.
 
         elif event.type == pygame.KEYUP:
             check_keyup_events(ship)  # Call the function for key released.
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            mouse_x, mouse_y = pygame.mouse.get_pos()
-            check_play_button(stats, play_button, mouse_x, mouse_y, bullets, game_settings, screen, ship, aliens, sb)
+        
 
 
 def check_play_button(stats, play_button, mouse_x, mouse_y, bullets, game_settings, screen, ship, aliens, sb):
